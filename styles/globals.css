@@ -1,0 +1,97 @@
+/* OpenFan Documentation — Accent: #e11d9e */
+
+:root {
+  --primary-color: #e11d9e;
+  --nextra-primary-hue: 320deg;
+  --nextra-primary-saturation: 80%;
+}
+
+html[class~='dark'] {
+  --nextra-primary-hue: 320deg;
+  --nextra-primary-saturation: 80%;
+}
+
+/* Smooth transitions */
+* {
+  transition:
+    background-color 0.3s ease,
+    border-color 0.3s ease,
+    color 0.3s ease;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #555;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #777;
+}
+
+/* Code block improvements */
+pre {
+  border-radius: 8px !important;
+}
+
+/* Table improvements */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.dark th,
+.dark td {
+  border-bottom-color: #374151;
+}
+
+th {
+  font-weight: 600;
+}
+
+/* Footer customization */
+footer {
+  border-top: 1px solid #e5e7eb;
+}
+
+.dark footer {
+  border-top-color: #1f2937;
+}
+
+/* Navigation improvements */
+nav a:hover {
+  opacity: 0.8;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}

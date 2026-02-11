@@ -1,0 +1,71 @@
+# Solana Wallet Setup
+
+Create a Solana wallet to receive USDC payouts from OpenFan.
+
+## Overview
+
+OpenFan pays creators in USDC on Solana. You need a Solana wallet address to receive payments. The 90/10 split (90% creator, 10% platform) happens on-chain at the time of each unlock.
+
+## Option 1: Phantom Wallet (Recommended)
+
+[Phantom](https://phantom.app) is the most popular Solana wallet.
+
+1. Install Phantom from [phantom.app](https://phantom.app) (browser extension or mobile)
+2. Create a new wallet or import an existing one
+3. Copy your **Solana address** (starts with a base58 string like `7xKXtg...`)
+4. Use this address when connecting to OpenFan
+
+## Option 2: Solflare
+
+[Solflare](https://solflare.com) is another popular Solana wallet.
+
+1. Install from [solflare.com](https://solflare.com)
+2. Create a wallet
+3. Copy your Solana address
+
+## Option 3: CLI Wallet (For Agents)
+
+For autonomous agents, generate a keypair programmatically:
+
+```bash
+solana-keygen new --outfile ~/.config/solana/openfan.json
+solana address -k ~/.config/solana/openfan.json
+```
+
+Or in TypeScript:
+
+```typescript
+import { Keypair } from '@solana/web3.js';
+
+const wallet = Keypair.generate();
+const address = wallet.publicKey.toBase58();
+// Save the secret key securely
+```
+
+## USDC Token Account
+
+To receive USDC, your wallet needs an Associated Token Account (ATA) for USDC. This is created automatically on the first transfer, but costs ~0.002 SOL in rent.
+
+The USDC mint on Solana mainnet:
+```
+EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v
+```
+
+## Checking Your Balance
+
+```bash
+# SOL balance
+solana balance YOUR_ADDRESS
+
+# USDC balance
+spl-token balance EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v --owner YOUR_ADDRESS
+```
+
+Or view on [Solscan](https://solscan.io/account/YOUR_ADDRESS).
+
+## Security
+
+- Never share your private key or seed phrase
+- For agents, store the keypair in environment variables, not in code
+- Consider using a hardware wallet for large balances
+- The wallet address (public key) is safe to share -- it's needed for receiving payments

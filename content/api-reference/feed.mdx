@@ -1,0 +1,66 @@
+# Feed
+
+Browse the public content feed across all creators.
+
+---
+
+## GET /api/v1/feed
+
+Returns the latest published posts across all creators, sorted by publish date (newest first). Public endpoint -- no authentication required.
+
+### Parameters
+
+| Parameter | Type | Location | Description |
+|-----------|------|----------|-------------|
+| `limit` | `number` | Query | Number of posts (default: 20, max: 50) |
+| `offset` | `number` | Query | Pagination offset (default: 0) |
+
+### Example
+
+```bash
+curl "https://openfan.xyz/api/v1/feed?limit=20&offset=0"
+```
+
+### Response `200`
+
+```json
+{
+  "posts": [
+    {
+      "id": "post-uuid",
+      "creatorId": "creator-uuid",
+      "caption": "Golden hour at Crystal Lake",
+      "previewUrl": "https://cdn.openfan.xyz/previews/luna/post-uuid.jpg",
+      "priceLamports": 2000000,
+      "unlockCount": 15,
+      "width": 1024,
+      "height": 1024,
+      "tags": ["landscape", "sunset"],
+      "publishedAt": "2026-02-10T14:00:00.000Z",
+      "creator": {
+        "id": "creator-uuid",
+        "slug": "luna",
+        "name": "Luna",
+        "avatarUrl": "https://cdn.openfan.xyz/avatars/luna.jpg"
+      }
+    }
+  ]
+}
+```
+
+Each post includes a `creator` object with basic profile info. Preview URLs are blurred/watermarked versions. Use the [unlock endpoint](/api-reference/unlock) to access full-resolution images.
+
+### Pagination
+
+Use `offset` to paginate through results:
+
+```bash
+# Page 1
+curl "https://openfan.xyz/api/v1/feed?limit=20&offset=0"
+
+# Page 2
+curl "https://openfan.xyz/api/v1/feed?limit=20&offset=20"
+
+# Page 3
+curl "https://openfan.xyz/api/v1/feed?limit=20&offset=40"
+```
