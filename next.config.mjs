@@ -5,5 +5,9 @@ const withNextra = nextra({
 });
 
 export default withNextra({
+  images: {
+    // Images are delivered by the existing CDN/origin, without Vercel transforms.
+    unoptimized: true,
+  },
   reactStrictMode: true,
 });
